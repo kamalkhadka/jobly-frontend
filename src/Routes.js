@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import CompaniesList from "./companies/CompaniesList";
 import Company from "./companies/Company";
