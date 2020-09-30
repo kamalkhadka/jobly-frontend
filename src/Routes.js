@@ -7,10 +7,8 @@ import Jobs from "./jobs/Jobs";
 import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "./Profile";
-import UserContext from "./UserContext";
 
 const Routes = ({ setToken }) => {
-  const { currentUser } = useContext(UserContext);
  
   return (
     <div className="container mt-4 text-center">
