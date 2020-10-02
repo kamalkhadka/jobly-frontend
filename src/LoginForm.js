@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import Alert from "./Alert";
 import useFormData from "./hooks/useFormData";
 import JoblyApi from "./JoblyApi";
 
@@ -7,13 +8,19 @@ const LoginForm = ({ setToken }) => {
   const history = useHistory();
   const INITIAL_STATE = { username: "", password: "" };
 
-  const [formData, handleChange] = useFormData(INITIAL_STATE);
+  const [formData, handleChange, setFormData] = useFormData(INITIAL_STATE);
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    const token = await JoblyApi.login(formData);
-    setToken(token);
-    history.push("/jobs");
+
+    try {
+      const token = await JoblyApi.login(formData);
+
+      setToken(token);
+      history.push("/jobs");
+    } catch (errors) {
+      setFormData((formData) => ({ ...formData, errors }));
+    }
   }
   return (
     <>
@@ -45,6 +52,9 @@ const LoginForm = ({ setToken }) => {
             className="form-control"
           />
         </div>
+        {formData.errors ? (
+          <Alert type="danger" message={formData.errors} />
+        ) : null}
         <button type="submit" className="btn btn-primary">
           Submit
         </button>

@@ -9,7 +9,6 @@ import PrivateRoute from "./PrivateRoute";
 import Profile from "./Profile";
 
 const Routes = ({ setToken }) => {
- 
   return (
     <div className="container mt-4 text-center">
       <Switch>
@@ -19,15 +18,15 @@ const Routes = ({ setToken }) => {
         <Route exact path="/login">
           <Login setToken={setToken} />
         </Route>
-        <Route exact path="/jobs">
+        <PrivateRoute exact path="/jobs">
           <Jobs />
-        </Route>
-        <Route exact path="/companies/:handle">
+        </PrivateRoute>
+        <PrivateRoute exact path="/companies/:handle">
           <Company />
-        </Route>
-        <Route exact path="/companies">
+        </PrivateRoute>
+        <PrivateRoute exact path="/companies">
           <CompaniesList />
-        </Route>
+        </PrivateRoute>
         <PrivateRoute exact path="/profile">
           <Profile />
         </PrivateRoute>
